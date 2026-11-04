@@ -96,16 +96,27 @@ Ingatan jangka panjang untuk folder `front/`. Tambahkan catatan **bertanggal** s
 ## To-do / Next
 ```json
 [
-  { "id": 1, "task": "Ganti data placeholder di src/data/profile.json (nama, email, sosial, bio)" },
-  { "id": 2, "task": "Ganti experience.json dan projects.json dengan data asli" },
-  { "id": 3, "task": "Ganti placeholder SVG di About.jsx dengan foto asli" },
-  { "id": 4, "task": "Deploy (Vercel / Netlify) setelah data final" },
-  { "id": 5, "task": "Mulai folder back/ bila dibutuhkan form kontak / API nyata" }
+  { "id": 1, "task": "Pemilik mengisi Q1-Q16 di docs/portfolio-design-specification.md §20.2 (email, GitHub, LinkedIn, CV, pengalaman, stack Gawe/AgroLedger)" },
+  { "id": 2, "task": "Pemilik menyetujui/menolak keputusan D1-D11 di docs/portfolio-design-specification.md §20.1" },
+  { "id": 3, "task": "Ganti data placeholder di src/data/*.json dengan data asli (nama salah: 'Ren Aizawa'; perusahaan & proyek fiktif)" },
+  { "id": 4, "task": "Implementasi ulang front/ sesuai tema 'The Long Horizon' — setelah D1-D11 disetujui" },
+  { "id": 5, "task": "Arsipkan design/*.figcraft bila pemilik mengizinkan (jangan hapus tanpa izin)" },
+  { "id": 6, "task": "Mulai folder back/ bila dibutuhkan form kontak / API nyata" }
 ]
 ```
 
-## 2026-10-29 (11) — Tampilan baru: "Scroll-Style Report" (gulungan lukisan tinta)
-**Status:** selesai. `npm run lint` (oxlint) bersih, `npm run build` lulus, QA browser (Playwright) 320/375/1280/1440 terang & gelap: tanpa overflow horizontal, 0 error console.
+## 2026-11-04 — Arah desain baru: "The Long Horizon" — **menggantikan seluruh tema visual sebelumnya**
+**Status:** dokumentasi saja. Tidak ada kode yang diubah, tidak ada aset dibuat.
+
+- **Sumber kebenaran baru:** `docs/portfolio-design-specification.md`. Kerangka enam bab: 01 Arrival, 02 Journey, 03 Expeditions (4 proyek), 04 Toolkit, 05 Quiet Moment, 06 Next Horizon.
+- **Tema "Scroll-Style Report" (gulungan tinta, kanji vertikal, vermilion, `paper-cut`) dinyatakan superseded (2026-11-04).** Kode di `front/` **masih** memakai tema itu sampai implementasi ulang; jangan menganggap theme lama sebagai acuan desain.
+- Perubahan konsep inti: warna halaman diinterpolasi dari progres scroll per bab (fajar → hutan → gurun → blue hour → malam → matahari terbit); **tidak ada toggle terang/gelap** (D1, belum disetujui); tidak ada navbar sticky, tidak ada Card, tidak ada grid bento; navigasi = rail bab (desktop) + chapter sheet (mobile).
+- Komponen lama yang akan dihapus saat implementasi: `Card`, `Stamp`, `Divider`, `ChapterNav`, `ThemeToggle`, `ProjectDetail` (diganti `ProjectSheet`), `.paper-cut`, `.vertical-title`, `.roller`, ornamen kanji.
+- **Data di `src/data/*.json` masih placeholder dan salah secara faktual** (nama "Ren Aizawa", perusahaan fiktif, proyek yang bukan milik pemilik). Diganti dengan data pemilik (Sakbanullah Dwi Oktavian) saat implementasi; lihat `NEEDS USER INPUT` di §20.2 spesifikasi.
+- Eksplorasi Figma di `design/` = calon arsip. **Jangan dihapus atau dipindah tanpa izin pemilik.**
+
+## 2026-10-29 (11) — Tampilan baru: "Scroll-Style Report" (gulungan lukisan tinta) — **superseded (2026-11-04)** oleh arah "The Long Horizon"
+**Status (dulu):** selesai. `npm run lint` (oxlint) bersih, `npm run build` lulus, QA browser (Playwright) 320/375/1280/1440 terang & gelap: tanpa overflow horizontal, 0 error console.
 - **Struktur:** 6 bab (Hero, About, Experience, Projects, Skills, Contact) di dalam satu frame gulungan: `.roller` di atas & bawah (`App.jsx`). Data JSON & `size: { col, row }` di Card **tidak berubah**.
 - **Palet/font baru** (`index.css`): washi `#efe6d5` / paper `#f8f3e8` / sumi `#211d19` / vermilion `#b3342a` / kin `#9a7b3f` / matsu `#3a4f45`; gelap `#12161c` (kertas hitam kebiruan) + tinta krem + emas `#c3a25e`. Font: Shippori Mincho + Noto Serif SC (cadangan kanji vertikal) + Inter.
 - **Judul bab:** `SectionHeading` kini menerima `chapter={n}` (prop, nomor 02–06) dan merender `第0N章` + kanji + judul **vertikal** (`.vertical-title`). Kicker tetap horizontal. Teks isi tetap horizontal, `leading-loose`.
